@@ -2,6 +2,7 @@ const apiKey = "9ab16a81a5cd5de8a5920395";
 let currencyOne = document.getElementById("currency-one");
 let currencyTwo = document.getElementById("currency-two");
 const swapButton = document.getElementById("swap-button");
+let rate = document.getElementById("rate");
 
 let amountOne = document.getElementById("amount-one");
 let amountTwo = document.getElementById("amount-two");
@@ -13,7 +14,9 @@ calculate();
 
 
 function updateUi( mulFactor ){
+    mulFactor = mulFactor.toFixed(2);
     amountTwo.value = mulFactor * amountOne.value ;
+    rate.innerText = `1 ${currencyOne.value} is equal to ${mulFactor} ${currencyTwo.value}`;
 }
 
 function calculate(){
