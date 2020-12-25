@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;1,900&display=swap');
 
 :root{
-    --background-color:rgb(85, 11, 30);
+    --background-color:#222831;;
 }
 *{
     box-sizing: border-box;
@@ -17,9 +17,13 @@ body{
 h1,h3{
     color: azure;
 }
+h2{
+  color: #D48166;
+}
 .search-conatiner{
     height: 10vh;
 }
+
 input{
     font-family: 'Mulish', sans-serif;
     font-weight: 900;
@@ -28,7 +32,7 @@ input{
     padding: 10px 5px;
     border-style: none;
     border-radius: 8px;
-    width: 300px;
+    width: 500px;
     
 }
 .search{
@@ -36,10 +40,10 @@ input{
 }
 button{
     cursor: pointer;
-    background-color: coral;
+    background-color: #D48166;
     padding: 7px 15px;
     margin: 5px;
-    border-color: aqua;
+    border-color: #E6E2DD;
     border-style: none;
     border-radius: 8px;
 }
@@ -104,12 +108,13 @@ input:focus{
   .single-meal-info {
     margin: 20px;
     padding: 10px;
-    border: 2px #e09850 dashed;
+    border: 2px #D48166 dotted;
     border-radius: 5px;
   }
   
   .single-meal p {
     margin: 0;
+    color: #E6E2DD;
     letter-spacing: 0.5px;
     line-height: 1.5;
   }
@@ -122,14 +127,41 @@ input:focus{
   .single-meal ul li {
     border: 1px solid #ededed;
     border-radius: 5px;
-    background-color: #fff;
+    background-color: #E6E2DD;
     display: inline-block;
-    color: #2d2013;
+    color: #373A36;
     font-size: 12px;
     font-weight: bold;
     padding: 5px;
     margin: 0 5px 5px 0;
   }
-
-
+  @media (max-width: 800px) {
+    .meals {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 700px) {
+    .meals {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .meal {
+      height: 200px;
+      width: 200px;
+    }
+  }
+  @media (max-width: 500px) {
+    input[type='text'] {
+      width: 100%;
+    }
+  
+    .meals {
+      grid-template-columns: 1fr;
+    }
+  
+    .meal {
+      height: 300px;
+      width: 300px;
+    }
+  }
 
