@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="tool-bar">
+        <div class="hamburger"></div>
+        <div class="tool-panel">
+            <div class="tool">
+                <img src="images/pencil.svg" alt="" class="tool-img" id="pencil" onclick="handleTool('pencil')" />
+
+                <div class="tool-options" id="pencil-options">
+                    <div class="slider">
+                        <input type="range" min="5" max="30" step="1" name="" />
+                    </div>
+                    <div class="colors">
+                        <div class="color white" onclick="changeColor('white')"></div>
+                        <div class="color blue" onclick="changeColor('blue')"></div>
+                        <div class="color red" onclick="changeColor('red')"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tool" id="eraser-options">
+                <img src="images/eraser.svg" alt="" class="tool-img" id="eraser" onclick="handleTool('eraser')" />
+                <div class="tool-options">
+                    <div class="slider">
+                        <input type="range" min="5" max="30" step="1" name="" />
+                    </div>
+                </div>
+            </div>
+            <div class="tool" id="sticky">
+                <img src="images/sticky.svg" alt="" class="tool-img" id="sticky" onclick="handleTool('sticky')" />
+            </div>
+        </div>
+    </div>
+    <canvas class="board"> </canvas>
+   
+    <script>
+        let board = document.querySelector(".board");
+        board.height = window.innerHeight;
+        board.width = window.innerWidth;
+        let ctx = board.getContext("2d");
+        
+        window.addEventListener("resize", function () {
+            board.height = window.innerHeight;
+            board.width = window.innerWidth;
+        });
+    </script>
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
+     
