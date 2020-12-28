@@ -1,41 +1,44 @@
+:root{
+   
+    --background-color:#222831;;
+    
+}
+
+
 *{
     box-sizing: border-box;
 }
 body{
-    background-color:#0b1216;
-    margin: 0px;
-    padding : 0px;
+    background-color:var(--background-color);
+    margin: 0;
     display:flex;
     align-items:center;
     flex-direction: column;
     justify-content:center;
+    overflow: hidden;
+    box-sizing: border-box;
 }
-
 .tool-bar{
     height: 10vh;
-    width:100vw;
+    width:100%;
     background-color: gray;
     display: flex;
-    align-item:center;
+    align-items :center;
     justify-content: space-between;
-    padding: 5px;
-   
-
 }
 .hamburger{
-    height: 90%;
-    width: 5%;
+    height: 3rem;
+    width: 3rem;
     margin-left: 1rem;
     background-color: yellow;
-    
 }
-
 .tool{
-    height: 90%;
+    height: 100%;
     position: relative;
 }
 .tool-panel{
-    width: 90%;
+    width: 100%;
+    margin: 0 1rem;
     background-color: cadetblue;
     display: flex;
     align-items: center;
@@ -44,7 +47,8 @@ body{
     /* visibility: hidden; */
 }
 .tool-img{
-    height: 105%;
+    height: 3rem;
+    width: 3rem;
 }
 .tool-options{
     height: 4rem;
@@ -66,7 +70,6 @@ body{
 }
 .color{
     height: 67%;
-    
     border-radius: 45px;
     width: 30px;
 }
@@ -74,19 +77,23 @@ body{
     background-color: white;
 }
 .blue{
-   
     background-color: blue;
-   
 }
 .color.red{
-    
     background-color: red;
-  
 }
 .show{
     display: block;
 }
+/* canva */
+.board{
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color);
+}
+
 .sticky{
+    border-radius: 1.5rem;
     height: 14rem;
     width: 14rem;
     background-color: aqua;
@@ -108,7 +115,6 @@ body{
     padding: 3px;
     margin: 5px;
     border-radius: 14px;
-
 }
 .close{
     height: 20px;
@@ -119,14 +125,22 @@ body{
     border-radius: 14px;
 }
 .textbox{
+    border: none;
+    border-radius: 1.5rem;
     height: 85%;
     width: 100%;
 }
 .textarea{
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
     height: 100%;
     width: 100%;
+    background-color: var(--background-color);
+    color: aliceblue;
+}
+.textarea:focus{
+    outline: 0;
 }
 .hide{
     display: none;
 }
-

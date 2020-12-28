@@ -1,32 +1,129 @@
+let undoArr = [];
+let redoArr = [];
+
+
+/////////////////////////////////////////////////
+
+let redo = document.getElementById("redo");
+let undo = document.getElementById("undo");
+
+
+
+    redo.addEventListener("click" , handleRedo);
+ undo.addEventListener("click" , handleUndo);
+
+
 // canvas
 let isPenDown = false;
 board.addEventListener("mousedown", function (e) {
     ctx.beginPath();
-    console.log("down");
-
+    
     let x = e.clientX;
     let y = e.clientY;
     let locfix = getlocation();
     ctx.moveTo(x , y - locfix);
     isPenDown = true;
 
+    let strokes ={
+        x,
+        y,
+        id: "md",
+        color: ctx.strokeStyle,
+        width: ctx.lineWidth
+    }
+
+    undoArr.push( strokes );
+    console.log( undoArr );
 });
 
+
+//////////////////
+
+
+
+
+//////////////////
 
 
 board.addEventListener("mousemove", function (e) {
     if( isPenDown ){
+        pencilOptions.classList.remove("show");
         console.log("move");
         let x = e.clientX;
-    let y = e.clientY;
-    let locfix = getlocation();
-    ctx.lineTo(x , y - locfix);
-       // ctx.strokeStyle = "yellow";
-       
+        let y = e.clientY;
+        let locfix = getlocation();
+        ctx.lineTo(x , y - locfix);
         ctx.stroke();
+        let strokes ={
+            x,
+            y,
+            id: "mm",
+            color: ctx.strokeStyle,
+            width: ctx.lineWidth
+        }
+        undoArr.push(strokes);
+         console.log( "md" , undoArr );
     }
+   
     
 });
+
+///////////////
+
+
+function handleUndo(){
+    console.log(undoArr)
+    if( undoArr.length >= 2 ){
+        let tempArr = [];
+        for( let i = undoArr.length -1 ; i >= 0 ; i-- ){
+            let { id } = undoArr[i];
+            if( id == "md" ){
+                // undoArr.pop()
+                tempArr.unshift(undoArr.pop());
+                break;
+            }else{
+                // undoArr.pop()
+                tempArr.unshift(undoArr.pop());
+            }
+        }
+        redoArr.push(tempArr);
+        handleRedraw();
+    }
+}
+
+
+
+function handleRedo(){
+    if( redoArr.length > 0 ){
+        let pathToRestore = redoArr.pop();
+        for( let i = 0 ; i < pathToRestore.length ; i++ ){
+            undoArr.push(pathToRestore[i]);
+        }
+        handleRedraw();
+    }
+
+}
+
+function handleRedraw(){
+    ctx.clearRect(0, 0, board.width, board.height);
+    for( let i = 0 ; i < undoArr.length ; i++ ){
+        let { x , y , id , color , width } = undoArr[i];
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        if (id == "md") {
+          ctx.beginPath();
+          ctx.moveTo(x, y-(0.1*window.innerHeight));
+        } else if (id == "mm") {
+          ctx.lineTo(x, y-(0.1*window.innerHeight));
+          ctx.stroke();
+        }
+    }
+}
+
+
+
+
+
 board.addEventListener("mouseup", function () {
     console.log("up");
     isPenDown=false;
@@ -94,7 +191,7 @@ function handleTool(tool){
         }
     }else if( tool == "pencil" ) {
         if( activetool == "pencil" ){
-            pencilOptions.classList.add("show");
+            pencilOptions.classList.toggle("show");
         }else{
             console.log("eraser");
             ctx.lineWidth = 20;
