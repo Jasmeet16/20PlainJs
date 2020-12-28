@@ -137,18 +137,21 @@ function getlocation(){
 ///////// sticky 
 
 function createSticky(){
+
+    console.log("sticky")
     
-    let sticky = document.createElement("div");
+   let sticky = document.createElement("div");
     let navBar = document.createElement("div");
     let close = document.createElement("div");
-    let min = document.createElement("div");
     let textbox = document.createElement("div");
     let textarea = document.createElement("textarea");
 
-    sticky.setAttribute("class" , "sticky");
+   sticky.setAttribute("class" , "sticky");
     navBar.setAttribute("class" , "nav-bar");
+
     close.setAttribute("class" , "close");
-    min.setAttribute("class" , "min");
+    close.innerHTML = '<i class="fas fa-times"></i>'
+
     textbox.setAttribute("class" , "textbox");
     textarea.setAttribute("class" , "textarea");    
 
@@ -158,11 +161,44 @@ function createSticky(){
 
     sticky.appendChild(navBar);
     sticky.appendChild(textbox);
-    navBar.appendChild(min);
     navBar.appendChild(close);
     textbox.appendChild(textarea);
 
     document.body.appendChild(sticky);
+
+
+var mousePosition;
+var offset = [0,0];
+var isDown = false;
+
+
+sticky.addEventListener('mousedown', function(e) {
+    isDown = true;
+    offset = [
+        sticky.offsetLeft - e.clientX,
+        sticky.offsetTop - e.clientY
+    ];
+}, true);
+
+document.addEventListener('mouseup', function() {
+    isDown = false;
+}, true);
+
+document.addEventListener('mousemove', function(event) {
+    event.preventDefault();
+    if (isDown) {
+        mousePosition = {
+
+            x : event.clientX,
+            y : event.clientY
+
+        };
+        sticky.style.left = (mousePosition.x + offset[0]) + 'px';
+        sticky.style.top  = (mousePosition.y + offset[1]) + 'px';
+    }
+}, true);
+
+   
 }
 
 
@@ -216,3 +252,12 @@ for( let i = 0 ; i< sliderarr.length ;i++ ){
         ctx.lineWidth = thickness;
     })
 }
+
+/// hamburger
+
+let hamburger = document.querySelector(".hamburger");
+let toolPanel = document.querySelector(".tool-panel");
+
+hamburger.addEventListener("click", ()=>{
+    toolPanel.classList.toggle("hide");
+})
